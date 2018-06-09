@@ -45,7 +45,7 @@ groups:
       quantile: "0.5"
   - alert: APIServerLatencyHigh
     expr: apiserver_latency_seconds:quantile{quantile="0.99",subresource!="log",verb!~"^(?:WATCH|WATCHLIST|PROXY|CONNECT)$"}
-      > 1
+      > 3
     for: 10m
     labels:
       severity: warning
