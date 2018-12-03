@@ -28,6 +28,8 @@ groups:
   - record: cluster:container_cpu_usage:ratio
     expr: sum(rate(container_cpu_usage_seconds_total{container_name!="POD",pod_name!=""}[5m]))
       / sum(machine_cpu_cores)
+  - record: pods_per_node
+    expr: label_replace(label_replace(kubelet_running_pod_count, "instance", "$1:9100", "instance", "(.+):.+") * on (instance) group_left(nodename) node_uname_info, "nodename", "$1", "nodename", "^(.+?)\\..*")
   - record: apiserver_latency_seconds:quantile
     expr: histogram_quantile(0.99, rate(apiserver_request_latencies_bucket[5m])) /
       1e+06

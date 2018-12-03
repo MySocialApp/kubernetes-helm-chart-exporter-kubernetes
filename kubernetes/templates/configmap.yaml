@@ -11,7 +11,7 @@ metadata:
     {{- if .Values.additionalRulesConfigMapLabels }}
 {{ toYaml .Values.additionalRulesConfigMapLabels | indent 4 }}
     {{- end }}
-  name: {{ template "exporter-kubernetes.fullname" . }}
+  name: {{ template "exporter-kubernetes.name" . }}
   namespace: {{ .Release.Namespace }}
 data:
 {{- if .Values.prometheusRules }}

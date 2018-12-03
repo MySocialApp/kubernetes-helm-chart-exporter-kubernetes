@@ -10,7 +10,7 @@ metadata:
     {{- if .Values.additionalServiceMonitorLabels }}
 {{ toYaml .Values.additionalServiceMonitorLabels | indent 4 }}
     {{- end }}
-  name: {{ template "exporter-kubernetes.fullname" . }}
+  name: {{ template "exporter-kubernetes.name" . }}
 spec:
   jobLabel: component
   selector:
